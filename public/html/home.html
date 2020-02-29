@@ -1,20 +1,39 @@
 <p>page d'accueil</p>
-<div id="tabScore">
-<table>
-        <thead>
-                <tr>
-                        <th>Rank</th>
-                        <th>Score</th>
-                        <th>Name</th>
-                </tr>
-        </thead>
-        <tbody>
-                {{scores}}
-        </tbody>
-</table>
-</div>
-<div id="element">
-        <div>
 
+<div id="container">
+        <div id="box">
+                <canvas id="canvas" width="480" height="700">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+                <canvas id="left"></canvas>
+                <canvas id="back"></canvas>
+                <canvas id="right"></canvas>
         </div>
 </div>
+<!--modal-->
+        <!--fin de partie-->
+        <div>
+                <button id="fin">fin</button>
+                <p>this is the end</p>
+                <a href="?controller=Home&action=display">Accueil - Scores</a>
+            </div>
+            <!--tableau de score-->
+            <div id="tabScore">
+                    <table>
+                            <thead>
+                                    <tr>
+                                            <th>Rank</th>
+                                            <th>Score</th>
+                                            <th>Name</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                    {{scores}}
+                            </tbody>
+                    </table>
+            </div>
+            <!--animation supp-->
+            <div id="element">
+                    <div>
+            
+                    </div>
+            </div>
+        </div>

@@ -12,4 +12,5 @@ class HomeController extends BaseController
         $liste = $this->model->listeScores();
         $this->view->displayHome($liste);
     }
+    
 }

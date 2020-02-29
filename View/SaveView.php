@@ -6,8 +6,4 @@ class SaveView extends BaseView
         parent::__construct();
     }
 
-    public function displaySave() {
-        $this->pageHTML .=file_get_contents( "public/html/end.html");
-        $this->displayHTML();
-    }
 }
