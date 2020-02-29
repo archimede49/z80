@@ -84,14 +84,39 @@
     display: none;
 }
 #modalScore{
+    width: 50%;
     position: absolute;
-    top: 300px;
+    top: 55px;
+}
+#modalScore>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #start{
     width: 100%;
 }
-canvas{
-    /* background-image: url('../src/planDeTravail2.png'); */
+#logo{
+    text-align: center;
+}
+#logo img{
+    width: 75%;
+}
+/* img:hover{
+    animation: dezoom 5s linear;
+    -webkit-animation: dezoom 5s linear;
+} */
+@keyframes dezoom{
+    0%{
+        width: 100%;
+    }
+    100%{
+        width: 75%;
+    }
+}
+#box{
+    display: flex;
+    flex-direction: column;
 }
 /* #container{ */
     /* position: relative; */

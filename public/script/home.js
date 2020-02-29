@@ -22,10 +22,12 @@ async function gameOver(){
 //     }
 // }
 function modalScore(e){
-    let element = document.querySelector('#modalScore')
+    let element = document.querySelector('#modalScore');
+    let imgLogo = document.querySelector('#logo img');
     let button = e.target.className;
     console.log(button)
     element.style.display ="block";
+    imgLogo.style.animation = 'dezoom 5s linear';
     if(button == 'gameOverhard'){
         document.querySelector('#endGame').style.display="block";
     }
