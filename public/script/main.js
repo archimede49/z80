@@ -46,10 +46,10 @@ window.addEventListener('load', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -68,9 +68,10 @@ window.addEventListener('load', () => {
   function dessinerTerrain () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     plateFormes = []
+    let k = 0
     for (let i = 0; i < 22; i++) {
       const ligne = terrain[i]
-      let k = 0
+      
       for (let j = 0; j < 15; j++) {
         if (ligne[j] === 1) {
           plateFormes[k] = new PlateForme(i, j)
@@ -135,27 +136,24 @@ window.addEventListener('load', () => {
       }
     }
     collisionPlateForme () {
-      //console.log(plateFormes)
-      // plateFormes.forEach(plateForme => {
-      //   console.log(this.posY);
-      //   console.log(plateForme.y);
-      //   //console.log(plateForme.x);
-      //   if(this.posY <= plateForme.y +32 + dy){
-      //     if(this.posX > plateForme.x - 32 || this.posX > plateForme.x + 32){
-      //        console.log(plateForme.x);
-      //       return true;
-      //    }
-      //   }
-      // });
-
+      console.log(plateFormes)
       let collision = false;
+      plateFormes.forEach(plateForme => {
+        if(this.posY <= plateForme.y -32 && this.posY >= plateForme.y -32 - dy){
+          if(this.posX >= plateForme.x - 32 && this.posX < plateForme.x + 32){
+            collision = true;
+          }
+        }
+      });
+
+      
 
       //Test collision plateforme base
-      if(this.posY <= plateFormes[0].y -32 && this.posY >= plateFormes[0].y -32 - dy){
-        if(this.posX >= plateFormes[0].x - 32 && this.posX < plateFormes[0].x + 32){
-          collision = true;
-        }
-      }
+      // if(this.posY <= plateFormes[0].y -32 && this.posY >= plateFormes[0].y -32 - dy){
+      //   if(this.posX >= plateFormes[0].x - 32 && this.posX < plateFormes[0].x + 32){
+      //     collision = true;
+      //   }
+      // }
       console.log(collision);
       return collision;
     }
