@@ -22,7 +22,9 @@ window.addEventListener('load', () => {
   //déclarations images
   var imageCoeur = new Image();
   imageCoeur.src = 'public/coeur.png';
-  
+  var imageFeu = new Image();
+  imageFeu.src = 'public/feu1.png';
+
   
   function keyDownHandler (e) {
     if (e.keyCode == 39) {
@@ -64,7 +66,7 @@ window.addEventListener('load', () => {
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -72,6 +74,18 @@ window.addEventListener('load', () => {
     [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
+
+  const tabItems ={
+    10 : {
+      img : imageCoeur,
+      score : 50
+    }, 
+    20 : {
+      img : imageFeu,
+      score : -15
+    }  
+  };
+
   var cpt = 0
   function dessinerTerrain () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -92,8 +106,8 @@ window.addEventListener('load', () => {
         else if(ligne[j] === 2){
           echelles[e] = new Echelle(i,j);
           e++;
-        }else if(ligne[j] === 10){
-          itemsBonus[cptItem] = new ItemsBonus(i,j);
+        }else if(ligne[j] === 10 || ligne[j] === 20){
+          itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
           cptItem++; 
         }else if (ligne[j] === 3) {
           if (cpt === 0) {
@@ -155,7 +169,6 @@ window.addEventListener('load', () => {
         }
       }
       if(this.collisionEchelle()){
-        console.log("je grimpe");
         if(upPressed){
           this.posY -= dy;
         }
@@ -171,20 +184,7 @@ window.addEventListener('load', () => {
       }else if (!this.collisionPlateForme()) {
         this.posY += dy
       }
-      //test echelle
-      // if(!this.collisionEchelle()){
-      //   console.log("je grimpe pas");
-      //   dy = 7;
-      // }else{
-      //   console.log("je grimpe");
-      //   dy = 0;
-      //   if(upPressed){
-      //     this.posY -= 7;
-      //   }
-      //   if(downPressed && ){
-      //     this.posY +=7;
-      //   }
-      // }
+     
       
       this.draw()
     }
@@ -206,21 +206,18 @@ window.addEventListener('load', () => {
 
     collisionEchelle(){
       let grimpe = false
-      console.log("début fonction");
       echelles.forEach(echelle => {
-        if((this.posX >= echelle.x -24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 24 && this.posY <= echelle.y + 24) ){
+        if((this.posX >= echelle.x -24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 28 && this.posY <= echelle.y + 24) ){
           grimpe = true;
-          //dy = 0;
-          //console.log("je grimpe");
-        }//else{
-        //   dy =7;
-        // }
+        }
       });
+      if(grimpe){
+        this.sautOk = true;
+      }
       return grimpe;
     }
 
     collisionPlateForme () {
-      //console.log(plateFormes)
       let collision = false;
       if(!this.grimpe){
         plateFormes.forEach(plateForme => {
@@ -264,10 +261,17 @@ window.addEventListener('load', () => {
   }
 
   class ItemsBonus {
-    constructor (i, j) {
+    constructor (i, j, indiceItem) {
       this.x = j * 32
       this.y = i * 32
-      ctx.drawImage(imageCoeur,this.x,this.y);
+      this.item = tabItems[indiceItem];
+      this.score = this.item.score;
+      ctx.drawImage(this.item.img,this.x,this.y);
+      this.actif = true;
+    }
+
+    desactiver(){
+      this.actif = false;
     }
   }
   dessinerTerrain()
