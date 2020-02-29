@@ -7,8 +7,8 @@ window.addEventListener('load', () => {
   var posY = 590
   var ballRadius = 10
   // valeurs déplacements
-  var dx = 7
-  var dy = 7
+  var dx = 8
+  var dy = 8
   // contrôles
   var rightPressed = false // 39
   var leftPressed = false // 37
