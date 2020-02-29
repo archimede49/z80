@@ -177,7 +177,7 @@ window.addEventListener('load', () => {
       ctx.closePath()
     }
     setPosition () {
-      console.log(this.sautOk);
+      // console.log(this.sautOk);
       if (!this.collisionCanva()) {
         if (rightPressed) {
           this.posX += dx

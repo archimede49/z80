@@ -1,12 +1,12 @@
 #tabScore{
-    width: 150px;
     height: 95px;
     border: 1px solid black;
     position: relative;
     overflow: hidden;
+    margin: 10px 0 15px 0
 }
 #tabScore table{
-    width: 150px;
+    width: 315px;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -32,7 +32,8 @@
     }
 }
 #element {
-    width: 150px;
+    width: 1280px;
+    margin-top: 10px;
     height: 25px;
     border: 1px solid black;
     position: relative;
@@ -48,8 +49,8 @@
     -o-border-radius: 50%;
     background: linear-gradient(to left, black, red, black);
     position: absolute;
-    animation: moveRotate 4s linear infinite, moveLinearLeftToRight 4s linear infinite;
-    -webkit-animation: moveRotate 4s linear infinite, moveLinearLeftToRight 4s linear infinite;
+    animation: moveRotate 4s linear infinite, moveLinearLeftToRight 14s linear infinite;
+    -webkit-animation: moveRotate 4s linear infinite, moveLinearLeftToRight 14s linear infinite;
 }
 @keyframes moveRotate{
     0%
@@ -79,7 +80,9 @@
         left: 110%;
     }
 }
-
+#endGame, #tabScore{
+    width: 315px;
+}
 .d-none{
     display: none;
 }
@@ -102,10 +105,11 @@
 #logo img{
     width: 75%;
 }
-/* img:hover{
-    animation: dezoom 5s linear;
-    -webkit-animation: dezoom 5s linear;
-} */
+#saveTag{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 @keyframes dezoom{
     0%{
         width: 100%;
@@ -118,13 +122,14 @@
     display: flex;
     flex-direction: column;
 }
-/* #container{ */
-    /* position: relative; */
-    /* perspective: 1000px;
+#container{
+    position: relative;
+    perspective: 2500px;
+    right: 240px;
 }
 #box{
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     position: relative;
     transform-style: preserve-3d;
     transform: translateZ(-240px);
@@ -180,9 +185,9 @@
     -o-transform: rotateY(180deg) translateZ(240px);
 }
 #box:hover{
-    transform: translateZ(-100px) rotateY(-90deg);
-    -webkit-transform: translateZ(-100px) rotateY(-90deg);
-    -moz-transform: translateZ(-100px) rotateY(-90deg);
-    -ms-transform: translateZ(-100px) rotateY(-90deg);
-    -o-transform: translateZ(-100px) rotateY(-90deg);
-} */
+    transform: translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px);
+    -webkit-transform: translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px);
+    -moz-transform: translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px);
+    -ms-transform: translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px);
+    -o-transform: translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px);
+}
