@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
   const canvas = document.getElementById('canvas')
   const ctx = canvas.getContext('2d')
+  
   // var position personnage
   var posX = 50
   var posY = 590
@@ -24,8 +25,9 @@ window.addEventListener('load', () => {
   imageCoeur.src = 'public/coeur.png';
   var imageFeu = new Image();
   imageFeu.src = 'public/feu1.png';
-
-  
+  var imageLvl1 = new Image();
+  imageLvl1.src = 'public/Niveau1.png';
+  ctx.drawImage(imageLvl1,0,0);
   function keyDownHandler (e) {
     if (e.keyCode == 39) {
       rightPressed = true
@@ -55,23 +57,23 @@ window.addEventListener('load', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 10, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 10, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
 
@@ -153,6 +155,7 @@ window.addEventListener('load', () => {
       ctx.closePath()
     }
     setPosition () {
+      console.log(this.sautOk);
       if (!this.collisionCanva()) {
         if (rightPressed) {
           this.posX += dx
@@ -161,7 +164,7 @@ window.addEventListener('load', () => {
         } 
 
         if (upPressed) {
-          if(!this.saut && this.posY >= this.ySaut){
+          if(!this.saut && this.sautOk ){
             this.saut = true;
             this.ySaut = this.posY;
             this.sautOk = false;
@@ -176,7 +179,8 @@ window.addEventListener('load', () => {
           this.posY += dy;
         }
       }else if(this.saut){
-        if(this.ySaut - this.posY < 64){
+        //alert('saut');
+        if(this.ySaut - this.posY < 48){
           this.posY-= dy;
         }else{
           this.saut = false;
@@ -186,8 +190,11 @@ window.addEventListener('load', () => {
       }
      
       
+      
       this.draw()
     }
+
+
     collisionCanva () {
       if (leftPressed && this.posX - dx <= 0) {
         this.posX = 0
@@ -207,7 +214,7 @@ window.addEventListener('load', () => {
     collisionEchelle(){
       let grimpe = false
       echelles.forEach(echelle => {
-        if((this.posX >= echelle.x -24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 28 && this.posY <= echelle.y + 24) ){
+        if((this.posX >= echelle.x -24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
           grimpe = true;
         }
       });
@@ -222,7 +229,7 @@ window.addEventListener('load', () => {
       if(!this.grimpe){
         plateFormes.forEach(plateForme => {
           if(this.posY <= plateForme.y -32 && this.posY >= plateForme.y -32 - dy) {
-            if(this.posX >= plateForme.x - 39 && this.posX <= plateForme.x + 25){
+            if(this.posX >= plateForme.x - 32 && this.posX <= plateForme.x + 27){
               collision = true;
               this.posY = plateForme.y -32;
             }
