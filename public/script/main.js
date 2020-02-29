@@ -219,8 +219,23 @@ window.addEventListener('load', () => {
       
       itemsBonus.forEach(item => {
         if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y -32 && this.posY <= item.y + 32)){
-          touche = true;
-          item.desactiver();
+          // touche = true;
+          // console.log("touché");
+          if(item.score >= 0){
+            touche = true;
+            item.desactiver();
+          }
+          else if(item.score < 0){
+            const date = new Date();
+            //console.log(date - item.dateTouche);
+            if(date - item.dateTouche > 1000){
+              touche = true;
+              item.setNewDate();
+              item.desactiver();
+            }
+            //item.dateTouche
+          }
+          console.log(touche);
         }
       });
     }
@@ -303,6 +318,7 @@ window.addEventListener('load', () => {
       this.y = i * 32
       this.item = tabItems[indiceItem];
       this.score = this.item.score;
+      this.dateTouche = new Date();
       //ctx.drawImage(this.item.img,this.x,this.y);
       this.actif = true;
       this.draw();
@@ -313,10 +329,14 @@ window.addEventListener('load', () => {
       }
     }
     desactiver(){
-      
       if(this.score > 0){
         this.actif = false;
+
       }
+    }
+
+    setNewDate(){
+      this.dateTouche = new Date();
     }
   }
   dessinerTerrain()
