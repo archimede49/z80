@@ -151,7 +151,8 @@ window.addEventListener('load', () => {
     for(const itemBonus of itemsBonus){
       itemBonus.draw();
     }
-    console.log(itemsBonus);
+    
+    //console.log(itemsBonus);
   }
   class Joueur {
     constructor (i, j) {
@@ -215,8 +216,9 @@ window.addEventListener('load', () => {
     collisionItem(){
       let touche = false;
       //console.log(itemsBonus);
+      
       itemsBonus.forEach(item => {
-        if((this.posX >= item.x -24 && this.posX <= item.x +24)){
+        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y -32 && this.posY <= item.y + 32)){
           touche = true;
           item.desactiver();
         }
@@ -306,11 +308,15 @@ window.addEventListener('load', () => {
       this.draw();
     }
     draw(){
-      ctx.drawImage(this.item.img,this.x,this.y);
+      if(this.actif){
+        ctx.drawImage(this.item.img,this.x,this.y);
+      }
     }
     desactiver(){
-      this.actif = false;
-      //ctx.drawImage('',this.x,this.y);
+      
+      if(this.score > 0){
+        this.actif = false;
+      }
     }
   }
   dessinerTerrain()
