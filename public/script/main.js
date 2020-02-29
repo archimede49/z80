@@ -18,16 +18,16 @@ window.addEventListener('load', () => {
   let plateFormes;
   let echelles;
   let obstacles;
-  let itemsBonus;
+  let itemsBonus = [];
   let pause = false;
   
   //déclarations images
   var imageCoeur = new Image();
-  imageCoeur.src = 'public/coeur.png';
+  imageCoeur.src = 'public/src/coeur.png';
   var imageFeu = new Image();
-  imageFeu.src = 'public/feu1.png';
+  imageFeu.src = 'public/src/flammeR.png';
   var imageLvl1 = new Image();
-  imageLvl1.src = 'public/Niveau1.png';
+  imageLvl1.src = 'public/src/Niveau1.png';
   ctx.drawImage(imageLvl1,0,0);
   function keyDownHandler (e) {
     if (e.keyCode == 39) {
@@ -115,7 +115,7 @@ window.addEventListener('load', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     plateFormes = []
     echelles = []
-    itemsBonus = [];
+    
     let k = 0;
     let e = 0;
     let cptItem = 0;
@@ -131,21 +131,28 @@ window.addEventListener('load', () => {
           echelles[e] = new Echelle(i,j);
           e++;
         }else if(ligne[j] === 10 || ligne[j] === 20){
-          itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
-          cptItem++; 
+          if(cpt === 0){
+            itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
+            cptItem++; 
+          }
         }else if (ligne[j] === 3) {
           if (cpt === 0) {
             joueur = new Joueur(i, j)
-            cpt++
+            //cpt++
           }
-            
         }
       }
     }
+    cpt++
     joueur.setPosition();
   }
   function draw () {
     dessinerTerrain()
+    for(const itemBonus of itemsBonus){
+      itemBonus.draw();
+    }
+    
+    //console.log(itemsBonus);
   }
   class Joueur {
     constructor (i, j) {
@@ -158,26 +165,15 @@ window.addEventListener('load', () => {
       this.draw()
     }
     draw () {
-      // var image = new Image();
-      // image.addEventListener('load', function() {
-      // ctx.beginPath()
-      // ctx.drawImage(image,0,0);
-      // ctx.rect(this.posX, this.posY, 32, 32)
-      // ctx.fillStyle = 'red'
-      // ctx.fill()
-      // ctx.closePath()
-      
-      // },false);
-      // image.src = 'public/Chorizo.png';
-
       ctx.beginPath()
       ctx.rect(this.posX, this.posY, 32, 32)
       ctx.fillStyle = 'public/Chorizo.png'
       ctx.fill()
       ctx.closePath()
     }
+
+
     setPosition () {
-      // console.log(this.sautOk);
       if (!this.collisionCanva()) {
         if (rightPressed) {
           this.posX += dx
@@ -193,6 +189,7 @@ window.addEventListener('load', () => {
           }
         }
       }
+      this.collisionItem();
       if(this.collisionEchelle()){
         if(upPressed){
           this.posY -= dy;
@@ -216,6 +213,17 @@ window.addEventListener('load', () => {
       this.draw()
     }
 
+    collisionItem(){
+      let touche = false;
+      //console.log(itemsBonus);
+      
+      itemsBonus.forEach(item => {
+        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y -32 && this.posY <= item.y + 32)){
+          touche = true;
+          item.desactiver();
+        }
+      });
+    }
 
     collisionCanva () {
       if (leftPressed && this.posX - dx <= 0) {
@@ -295,12 +303,20 @@ window.addEventListener('load', () => {
       this.y = i * 32
       this.item = tabItems[indiceItem];
       this.score = this.item.score;
-      ctx.drawImage(this.item.img,this.x,this.y);
+      //ctx.drawImage(this.item.img,this.x,this.y);
       this.actif = true;
+      this.draw();
     }
-
+    draw(){
+      if(this.actif){
+        ctx.drawImage(this.item.img,this.x,this.y);
+      }
+    }
     desactiver(){
-      this.actif = false;
+      
+      if(this.score > 0){
+        this.actif = false;
+      }
     }
   }
   dessinerTerrain()
