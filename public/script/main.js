@@ -7,8 +7,8 @@ window.addEventListener('load', () => {
   var posY = 590
   var ballRadius = 10
   // valeurs déplacements
-  var dx = 7
-  var dy = 7
+  var dx = 8
+  var dy = 8
   // contrôles
   var rightPressed = false // 39
   var leftPressed = false // 37
@@ -19,7 +19,8 @@ window.addEventListener('load', () => {
   let echelles;
   let obstacles;
   let itemsBonus;
-
+  let pause = false;
+  
   //déclarations images
   var imageCoeur = new Image();
   imageCoeur.src = 'public/coeur.png';
@@ -37,6 +38,27 @@ window.addEventListener('load', () => {
       upPressed = true
     } else if (e.keyCode == 40) {
       downPressed = true
+    }else if (e.keyCode === 32) {
+      if (!pause) {
+        clearInterval(interval)
+        ctx.beginPath()
+        ctx.rect(0, 0, canvas.width, canvas.height)
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
+        ctx.fill()
+        ctx.closePath()
+        pause = true
+      } else {
+        interval = setInterval(draw, 20)
+        pause = false
+      }
+      // Gestion de la suppression
+    } else if (e.keyCode === 46) {
+      joueur = undefined
+      // force une nouvelle déclaration du joueur
+      cpt = 0
+      plateFormes = undefined
+      itemsBonus = undefined
+      echelles = undefined
     }
   }
   function keyUpHandler (e) {
@@ -282,5 +304,5 @@ window.addEventListener('load', () => {
     }
   }
   dessinerTerrain()
-  setInterval(draw, 20)
+  let interval = setInterval(draw, 20)
 })
