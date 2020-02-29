@@ -8,8 +8,9 @@ class HomeView extends BaseView
 
     public function displayHome($liste) {
         $score = '';
+        $i = 1;
         foreach ($liste as $unitScore){
-            $score .= "<li>$unitScore[0] - $unitScore[1]</li>";
+            $score .= "<tr><td>".$i++."</td><td>".$unitScore[0]."</td><td>".$unitScore[1]."</td></tr>";
         }
         $this->pageHTML .=file_get_contents( "public/html/home.html");
         $this->pageHTML = str_replace("{{scores}}", $score, $this->pageHTML);

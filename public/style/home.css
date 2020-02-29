@@ -1,0 +1,81 @@
+#tabScore{
+    width: 150px;
+    height: 95px;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+}
+#tabScore table{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    animation: moveScore 4s ease-out;
+    -webkit-animation: moveScore 4s ease-out;
+}
+#tabScore table thead tr, #tabScore table tbody tr{
+    display: flex;
+}
+#tabScore table thead tr th, #tabScore table tbody td {
+    width: 33%;
+    text-align: center;
+}
+@keyframes moveScore{
+    0% {
+        bottom: -200px;
+    }
+    99% {
+        bottom: 110%;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+#element {
+    width: 150px;
+    height: 25px;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+}
+#element div {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background: linear-gradient(to left, black, red, black);
+    position: absolute;
+    animation: moveRotate 4s linear infinite, moveLinearLeftToRight 4s linear infinite;
+    -webkit-animation: moveRotate 4s linear infinite, moveLinearLeftToRight 4s linear infinite;
+}
+@keyframes moveRotate{
+    0%
+    {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}
+@keyframes moveLinearLeftToRight{
+    0%
+    {
+        left: -25px;
+    }
+    100%
+    {
+        left: 110%;
+    }
+}
