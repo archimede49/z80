@@ -79,3 +79,85 @@
         left: 110%;
     }
 }
+
+.d-none{
+    display: none;
+}
+#modalScore{
+    position: absolute;
+    top: 300px;
+}
+#start{
+    width: 100%;
+}
+canvas{
+    /* background-image: url('../src/planDeTravail2.png'); */
+}
+/* #container{ */
+    /* position: relative; */
+    /* perspective: 1000px;
+}
+#box{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-240px);
+    transition: transform 3s;
+    -webkit-transition: transform 3s;
+    -moz-transition: transform 3s;
+    -ms-transition: transform 3s;
+    -o-transition: transform 3s;
+    -webkit-transform: translateZ(-240px);
+    -moz-transform: translateZ(-240px);
+    -ms-transform: translateZ(-240px);
+    -o-transform: translateZ(-240px);
+}
+.front{
+    position: absolute;
+    transform: rotateY(0deg) translateZ(240px);
+    -webkit-transform: rotateY(0deg) translateZ(240px);
+    -moz-transform: rotateY(0deg) translateZ(240px);
+    -ms-transform: rotateY(0deg) translateZ(240px);
+    -o-transform: rotateY(0deg) translateZ(240px);
+}
+.left{
+    position: absolute;
+    background-color: blue;
+    width: 480px;
+    height: 700px;
+    transform: rotateY(-90deg) translateZ(240px);
+    -webkit-transform: rotateY(-90deg) translateZ(240px);
+    -moz-transform: rotateY(-90deg) translateZ(240px);
+    -ms-transform: rotateY(-90deg) translateZ(240px);
+    -o-transform: rotateY(-90deg) translateZ(240px);
+}
+.right{
+    position: absolute;
+    background-color: coral;
+    width: 480px;
+    height: 700px;
+    transform: rotateY(90deg) translateZ(240px);
+    -webkit-transform: rotateY(90deg) translateZ(240px);
+    -moz-transform: rotateY(90deg) translateZ(240px);
+    -ms-transform: rotateY(90deg) translateZ(240px);
+    -o-transform: rotateY(90deg) translateZ(240px);
+}
+.back{
+    position: absolute;
+    background-color: green;
+    width: 480px;
+    height: 700px;
+    transform: rotateY(180deg) translateZ(240px);
+    -webkit-transform: rotateY(180deg) translateZ(240px);
+    -moz-transform: rotateY(180deg) translateZ(240px);
+    -ms-transform: rotateY(180deg) translateZ(240px);
+    -o-transform: rotateY(180deg) translateZ(240px);
+}
+#box:hover{
+    transform: translateZ(-100px) rotateY(-90deg);
+    -webkit-transform: translateZ(-100px) rotateY(-90deg);
+    -moz-transform: translateZ(-100px) rotateY(-90deg);
+    -ms-transform: translateZ(-100px) rotateY(-90deg);
+    -o-transform: translateZ(-100px) rotateY(-90deg);
+} */

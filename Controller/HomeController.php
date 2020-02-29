@@ -10,7 +10,13 @@ class HomeController extends BaseController
     }
     public function display(){
         $liste = $this->model->listeScores();
-        $this->view->displayHome($liste);
+        if(isset($_GET['fin']) && $_GET['fin'] == 'true'){
+            // var_dump($liste);
+            $test = '{"liste" : "test"}';
+            return $test;
+        }else{
+            $this->view->displayHome($liste);
+        }
     }
     
 }
