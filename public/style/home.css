@@ -61,6 +61,20 @@
     /* animation: moveLinearLeftToRight 14s linear infinite;
     -webkit-animation: moveLinearLeftToRight 14s linear infinite; */
 }
+
+
+ #fin{
+    background: #92CD41;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    font-family: 'Font Retro', cursive;
+    text-decoration: none;
+    color: white;
+    box-shadow: inset -4px -4px 0px 0px #4AA52E;
+}
 #chut1{
     position: absolute;
     width: 32px;
@@ -117,6 +131,7 @@
     position: absolute;
     background-color: white;
     opacity: 0.8;
+    bottom: 54px;
 }
 #modalScore>div {
     display: flex;
@@ -125,6 +140,16 @@
 }
 #start{
     width: 100%;
+    background: #92CD41;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    font-family: 'Font Retro', cursive;
+    text-decoration: none;
+    color: white;
+    box-shadow: inset -4px -4px 0px 0px #4AA52E;
 }
 #logo{
     text-align: center;
@@ -147,8 +172,29 @@
 }
 #infoGame{
     width: 315px;
-    height: 130px;
-    border: 1px solid black;
+    height: 200px;
+    /* border: 1px solid black; */
+}
+#audioLecture{
+    background-image: url('../src/play.png');
+
+}
+#audioPause{
+    background-image: url('../src/pause.png');
+}
+#audioStop{
+    background-image: url('../src/arret.png');
+}
+#audioLecture, #audioPause, #audioStop{
+    width: 17px;
+    height: 17px;
+    margin: 2px;
+}
+#lecteurAudio{
+    display: flex;
+    position: relative;
+    top: 50px;
+    left: 700px;
 }
 #box{
     display: flex;

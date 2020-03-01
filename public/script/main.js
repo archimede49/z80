@@ -128,7 +128,7 @@ window.addEventListener('load', () => {
     }else if (e.keyCode === 32) {
       if (!pause) {
         clearInterval(interval)
-        homeJs.modalScore();
+        homeJs.modalScore('pause');
         ctx.beginPath()
         ctx.rect(0, 0, canvas.width, canvas.height)
         ctx.fillStyle = "rgba(255, 255, 255, 0.5)"

@@ -7,14 +7,24 @@ window.addEventListener('DOMContentLoaded',event => {
     let fin = document.querySelector('#fin')
     let score = document.querySelector('#btnScore')
     let start = document.querySelector('#start');
+    const sonIntro = document.querySelector("#sonIntro");
+    const sonEnnemi2 = document.querySelector('#sonEnnemi2');
     // let scoreEnd = document.querySelector('#btnScore1')
     // let move = document.querySelector('#moveCanvas')
+    let choriSon = document.querySelector('#chori');
+    let choriVertSon = document.querySelector('#choriVert');
+    // choriSon.onclick = document.querySelector('#choriSon').play();
+    choriVertSon.onclick = ()=>{sonEnnemi2.play();}
     console.log(fin);
     fin.onclick = gameOver;
     score.onclick = modalScore;
     start.onclick = startGame;
     // scoreEnd.onclick = modalScore;
     // move.onclick = moveCanvas;
+    document.addEventListener('userproximity', SensorEvent=>{
+        console.log(SensorEvent);
+        sonIntro.play();
+    });
     
 });
 async function gameOver(){
@@ -27,12 +37,21 @@ async function gameOver(){
 export function modalScore(e){
     let element = document.querySelector('#modalScore');
     let imgLogo = document.querySelector('#logo img');
+    let infoGame = document.querySelector('#infoGame');
     let button = e;
+    // let audioDuLvl = document.querySelector(`#sonLvL${lvl}`);
     element.style.display ="block";
+    infoGame.style.backgroundImage = "url('public/src/VisuelMenu1.png')";
     if(button == 'gameOverhard'){
         document.querySelector('#endGame').style.display="block";
+        // document.querySelector('#start').style.display="none";
+        infoGame.style.backgroundImage = "url('public/src/gameOver2.png')";
     }else if (button == 'finPause'){
         element.style.display ="none";
+        document.querySelector("audio").pause();
+    }else if (button == 'pause'){
+        document.querySelector("audio").pause();
+        sonIntro.play();
     }else{
         imgLogo.style.animation = 'dezoom 5s linear';
     }
@@ -74,10 +93,15 @@ export function moveCanvas(){
 }
 function startGame(){
     let element = document.querySelector('#modalScore');
+    let audio = document.querySelector("#sonLvL1");
     element.style.display ="none";
+    audio.play();
 }
 function animationLinear(){
     let random = Math.random()*20;
+    if(random<1){
+        random = random+1;
+    }
     console.log(random);
     let chori = document.querySelector('#chori');
     let choriVert = document.querySelector('#choriVert');
