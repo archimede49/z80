@@ -770,6 +770,7 @@ async function gameOver(){
   let repSet = await fetch(`?controller=Save&action=saveScore&tag=${tag}&score=${score}`, {method: 'GET'});
   // let reponse = await rep.json();
   console.log(repSet);
+  document.location.reload(true);
 }
 function modalScore(e){
   let element = document.querySelector('#modalScore');
@@ -781,7 +782,7 @@ function modalScore(e){
   infoGame.style.backgroundImage = "url('public/src/VisuelMenu1.png')";
   if(button == 'gameOverhard'){
       document.querySelector('#endGame').style.display="block";
-      // document.querySelector('#start').style.display="none";
+      document.querySelector('#start').style.display="none";
       infoGame.style.backgroundImage = "url('public/src/gameOver2.png')";
   }else if (button == 'finPause'){
       element.style.display ="none";
