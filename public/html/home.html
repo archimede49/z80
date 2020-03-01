@@ -1,14 +1,14 @@
 <p>page d'accueil</p>
 <button id="btnScore">score</button>
-<button id="btnScore1" class="gameOverhard">game over</button>
-<button id="moveCanvas">move</button>
+<!-- <button id="btnScore1" class="gameOverhard">game over</button> -->
+<!-- <button id="moveCanvas">move</button> -->
 
 <div id="container">
         <div id="box">
-                <canvas id="canvas" class="front" width="480" height="700">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-                <canvas class="left"></canvas>
-                <canvas class="back"></canvas>
-                <canvas class="right"></canvas>
+                <canvas id="canvas" class="front" width="480" height="700" data-pateau="1">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+                <canvas class="right" width="480" height="700" data-pateau="2"></canvas>
+                <canvas class="back" width="480" height="700" data-pateau="3"></canvas>
+                <canvas class="left" width="480" height="700" data-pateau="4"></canvas>
         </div>
 </div>
 <!--modal-->
