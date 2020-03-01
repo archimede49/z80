@@ -15,6 +15,7 @@ window.addEventListener('load', () => {
   var upPressed = false // 38
   var downPressed = false // 40
   let joueur;
+  let mechants = [];
   let plateFormes;
   let echelles;
   let obstacles;
@@ -51,6 +52,9 @@ window.addEventListener('load', () => {
 
   var imageChorizoMonte2 = new Image();
   imageChorizoMonte2.src = 'public/src/chorizoMonte2.png'; 
+
+  var imageMechant = new Image();
+  imageMechant.src = 'public/src/mechantQuiMarche.png'
 
   //background
   var imageLvl1 = new Image();
@@ -144,7 +148,7 @@ window.addEventListener('load', () => {
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 10, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
+    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
@@ -163,6 +167,12 @@ window.addEventListener('load', () => {
     }  
   };
 
+  const tabEnnemis = {
+    30 : {
+      img : imageMechant
+    }
+  }
+
   var cpt = 0
   function dessinerTerrain () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -172,6 +182,7 @@ window.addEventListener('load', () => {
     let k = 0;
     let e = 0;
     let cptItem = 0;
+    let cptMechant = 0;
     for (let i = 0; i < 22; i++) {
       const ligne = terrain[i]
       
@@ -187,6 +198,11 @@ window.addEventListener('load', () => {
           if(cpt === 0){
             itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
             cptItem++; 
+          }
+        }else if(ligne[j] === 30){
+          if(cpt === 0){
+            mechants[cptMechant] = new Mechant(i,j,ligne[j]);
+            cptMechant++;
           }
         }else if (ligne[j] === 3) {
           if (cpt === 0) {
@@ -204,7 +220,9 @@ window.addEventListener('load', () => {
     for(const itemBonus of itemsBonus){
       itemBonus.draw();
     }
-    
+    for(const ennemi of mechants){
+      ennemi.draw();
+    }
     //console.log(itemsBonus);
   }
   class Joueur {
@@ -408,6 +426,19 @@ window.addEventListener('load', () => {
 
     setNewDate(){
       this.dateTouche = new Date();
+    }
+  }
+
+  class Mechant {
+    constructor (i,j,indiceMechant){
+      this.posX = j * 32;
+      this.posY = i * 32;
+      this.mechant = tabEnnemis[indiceMechant];
+      console.log(this.mechant);
+      this.draw();
+    }
+    draw(){
+      ctx.drawImage(imageMechant,this.posX,this.posY);
     }
   }
   dessinerTerrain()
