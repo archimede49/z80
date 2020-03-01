@@ -144,7 +144,7 @@ window.addEventListener('load', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
-    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0],
+    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -351,7 +351,7 @@ window.addEventListener('load', () => {
     collisionEchelle(){
       let grimpe = false
       echelles.forEach(echelle => {
-        if((this.posX >= echelle.x - 24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
+        if((this.posX >= echelle.x - 24  && this.posX <= echelle.x +40)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
           grimpe = true;
         }
       });
