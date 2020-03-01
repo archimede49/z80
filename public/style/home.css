@@ -126,7 +126,7 @@
     display: none;
 }
 #modalScore{
-    width: 50%;
+    width: 38%;
     min-height: 700px;
     position: absolute;
     background-color: white;
@@ -170,10 +170,14 @@
         width: 75%;
     }
 }
-#infoGame{
+#infoGame, #interNiveau{
     width: 315px;
     height: 200px;
     /* border: 1px solid black; */
+}
+#interNiveau{
+    top: 69px;
+    position: absolute;
 }
 #audioLecture{
     background-image: url('../src/play.png');
@@ -193,8 +197,8 @@
 #lecteurAudio{
     display: flex;
     position: relative;
-    top: 50px;
-    left: 700px;
+    top: 35px;
+    left: 515px;
 }
 #box{
     display: flex;

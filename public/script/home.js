@@ -1,14 +1,25 @@
+
+
 window.addEventListener('DOMContentLoaded',event => {
     modalScore();
     animationLinear()
     chuteAlea();
     event.preventDefault();
+
     console.log('dom complètement chargé')
+    const sonIntro = document.querySelector("#sonIntro");
+    const sonEnnemi2 = document.querySelector('#sonEnnemi2');
+    const audioG = document.querySelector("audio");
     let fin = document.querySelector('#fin')
     let score = document.querySelector('#btnScore')
     let start = document.querySelector('#start');
-    const sonIntro = document.querySelector("#sonIntro");
-    const sonEnnemi2 = document.querySelector('#sonEnnemi2');
+    let audioLecture =  document.querySelector('#audioLecture');
+    audioLecture.onclick = ()=>{sonIntro.play();}
+    let audioPause =  document.querySelector('#audioPause');
+    audioPause.onclick = ()=>{audioG.pause();}
+    let audioStop =  document.querySelector('#audioStop');
+    audioStop.onclick = ()=>{audioG.pause();}
+    
     // let scoreEnd = document.querySelector('#btnScore1')
     // let move = document.querySelector('#moveCanvas')
     let choriSon = document.querySelector('#chori');
@@ -21,10 +32,6 @@ window.addEventListener('DOMContentLoaded',event => {
     start.onclick = startGame;
     // scoreEnd.onclick = modalScore;
     // move.onclick = moveCanvas;
-    document.addEventListener('userproximity', SensorEvent=>{
-        console.log(SensorEvent);
-        sonIntro.play();
-    });
     
 });
 async function gameOver(){
@@ -48,9 +55,9 @@ export function modalScore(e){
         infoGame.style.backgroundImage = "url('public/src/gameOver2.png')";
     }else if (button == 'finPause'){
         element.style.display ="none";
-        document.querySelector("audio").pause();
+        audioG.pause();
     }else if (button == 'pause'){
-        document.querySelector("audio").pause();
+        audioG.pause();
         sonIntro.play();
     }else{
         imgLogo.style.animation = 'dezoom 5s linear';
