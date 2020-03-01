@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
   let niveau = 1;
   //suivi joueur
   let score = 0;
-  let vie = 9;
+  let vie = 5;
 
   //déclarations images
   var imageCoeur = new Image();
@@ -186,11 +186,11 @@ window.addEventListener('load', () => {
         
       interText.style.backgroundImage = `url('public/src/Visuel${niveau}.png')`;
       interText.style.zIndex = "3";
-      }, 3000);
+      }, 1000);
       setTimeout(()=>{
         interText.style.zIndex = "-1";
         interval = setInterval(draw, 50)
-      }, 8000);
+      }, 5000);
     
   }
 
@@ -210,24 +210,25 @@ window.addEventListener('load', () => {
       pause = false
     }
   }
-function restart(niveau){
-      clearInterval(interval);
-      canvas = document.getElementById('canvas');
-      ctx = canvas.getContext('2d');
-      joueur = undefined
-      // force une nouvelle déclaration du joueur
-      cpt = 0
-      plateFormes = []
-      itemsBonus = []
-      echelles = []
-      if(niveau ==1){
-        score = 0
-        vie = 3
-      }
-      
-      dessinerTerrain();
-      interval = setInterval(draw,50);
-
+  function restart(niveau){
+    clearInterval(interval);
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    joueur = undefined
+    // force une nouvelle déclaration du joueur
+    cpt = 0
+    plateFormes = []
+    itemsBonus = []
+    echelles = []
+    mechants =[];
+    mechantsVolants = [];
+    if(niveau ==1){
+      score = 0
+      vie = 3
+    }
+    
+    dessinerTerrain();
+    interval = setInterval(draw,50);
 }
 
   function keyUpHandler (e) {
@@ -269,6 +270,7 @@ function restart(niveau){
   // ]
 
   //Niveau 1
+  //Niveau 1
   terrain[1] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -280,12 +282,12 @@ function restart(niveau){
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 40, 0, 0, 13],
     [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 20, 11, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
@@ -293,33 +295,31 @@ function restart(niveau){
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
-
   //Niveau 2
   terrain[2] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 10, 0],
     [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 11, 0],
     [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 10, 2, 0, 30, 0, 0, 0, 12, 0, 20, 0, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-    [0, 3, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 3, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 2, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
-
   //Niveau 3
   terrain[3] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -332,12 +332,12 @@ function restart(niveau){
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 11],
     [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+    [0, 12, 2, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
@@ -345,8 +345,7 @@ function restart(niveau){
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
-
-  //Niveau 3
+  //Niveau 4
   terrain[4] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -482,6 +481,7 @@ function restart(niveau){
       score = 0;
     }
     ctx.font = "20px Font Retro";
+    ctx.fillStyle = "black";
     ctx.fillText(score,5,20);
     ctx.fillText("Santé : "+vie,360,20);
 
@@ -889,53 +889,55 @@ function modalScore(e){
   }
 }
 function moveCanvas(){
-  let testBox = document.querySelector('#box');
-  console.log(testBox);
-  let childBox = testBox.children;
-  console.log(childBox);
-  let firstChildBox = testBox.firstElementChild;// penser a vider le canvas 
-  let classFCB = firstChildBox.className;
+  // let testBox = document.querySelector('#box');
+  // console.log(testBox);
+  // let childBox = testBox.children;
+  // console.log(childBox);
+  // let firstChildBox = testBox.firstElementChild;// penser a vider le canvas 
+  // let classFCB = firstChildBox.className;
   
-  if(classFCB == 'front'){
-      box.style.transform = 'translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px)';
-      childBox[0].removeAttribute('id');
-      childBox[1].setAttribute('id','canvas');
-      var newOrder = new Array(childBox[1],childBox[2],childBox[3],childBox[0]);
-      for (let index = 0; index < 4; index++) {
-          box.appendChild(newOrder[index]);
-      }
-  }else if(classFCB == 'right'){
-      box.style.transform = 'translateZ(-100px) rotateY(-180deg) translateZ(237px) translateX(-478px)';
-      childBox[1].removeAttribute('id');
-      childBox[2].setAttribute('id','canvas');
-      var newOrder = new Array(childBox[2],childBox[3],childBox[0],childBox[1]);
-      for (let index = 0; index < 4; index++) {
-          box.appendChild(newOrder[index]);
-      }
-  }else if(classFCB == 'left'){
-      box.style.transform = 'translateZ(-100px) rotateY(-270deg) translateZ(223px)';
-      childBox[2].removeAttribute('id');
-      childBox[3].setAttribute('id','canvas');
-      var newOrder = new Array(childBox[3],childBox[0],childBox[1],childBox[2]);
-      for (let index = 0; index < 4; index++) {
-          box.appendChild(newOrder[index]);
-      }
-  }else if(classFCB == 'back'){
-      //gameOver;
-      // if(niveau === 4){
-      //   modalScore("win");
-      // }
-      // childBox[0].removeAttribute('id');
-      // childBox[1].setAttribute('id','canvas');
-      // var newOrder = new Array(childBox[0],childBox[1],childBox[2],childBox[3]);
-      // for (let index = 0; index < 4; index++) {
-      //     box.appendChild(newOrder[index]);
-      // }
-  }
-  if(niveau <= 4){
+  // if(classFCB == 'front'){
+  //     box.style.transform = 'translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px)';
+  //     childBox[0].removeAttribute('id');
+  //     childBox[1].setAttribute('id','canvas');
+  //     var newOrder = new Array(childBox[1],childBox[2],childBox[3],childBox[0]);
+  //     for (let index = 0; index < 4; index++) {
+  //         box.appendChild(newOrder[index]);
+  //     }
+  // }else if(classFCB == 'right'){
+  //     box.style.transform = 'translateZ(-100px) rotateY(-180deg) translateZ(237px) translateX(-478px)';
+  //     childBox[0].removeAttribute('id');
+  //     childBox[2].setAttribute('id','canvas');
+  //     var newOrder = new Array(childBox[2],childBox[3],childBox[0],childBox[1]);
+  //     for (let index = 0; index < 4; index++) {
+  //         box.appendChild(newOrder[index]);
+  //     }
+  // }else if(classFCB == 'left'){
+  //     box.style.transform = 'translateZ(-100px) rotateY(-270deg) translateZ(223px)';
+  //     childBox[0].removeAttribute('id');
+  //     childBox[3].setAttribute('id','canvas');
+  //     var newOrder = new Array(childBox[3],childBox[0],childBox[1],childBox[2]);
+  //     for (let index = 0; index < 4; index++) {
+  //         box.appendChild(newOrder[index]);
+  //     }
+  // }else if(classFCB == 'back'){
+  //     //gameOver;
+  //     // if(niveau === 4){
+  //     //   modalScore("win");
+  //     // }
+  //     // childBox[0].removeAttribute('id');
+  //     // childBox[1].setAttribute('id','canvas');
+  //     // var newOrder = new Array(childBox[0],childBox[1],childBox[2],childBox[3]);
+  //     // for (let index = 0; index < 4; index++) {
+  //     //     box.appendChild(newOrder[index]);
+  //     // }
+  // }
+  if(niveau < 4){
   niveau++;
   restart(niveau);
   interNiveau();
+  }else{
+    modalScore('win');
   }
 }
 function startGame(){

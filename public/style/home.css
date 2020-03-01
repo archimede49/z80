@@ -77,40 +77,54 @@
 }
 #chut0,#chut1, #chut2, #chut3, #chut4, #chut5, #chut6, #chut7, #chut8, #chut9{
     position: absolute;
-}
-    /* left:15px;
     width: 32px;
     height: 32px;
+    /* left:15px;
+
     background-color: red;
     animation: moveLinearTopToBottom 14s linear infinite;
     -webkit-animation: moveLinearTopToBottom 14s linear infinite;
+    */
+}
+#chut0{
+    left:15px;
+    background-image: url('../src/mechantQuiMarche.png');
 }
 #chut1{
     left: 109px;
+    background-image: url('../src/flammeB.png.png');
 }
 #chut2{
     left: 213px;
+    background-image: url('../src/piment.png.png');
 }
 #chut3{
     left: 317px;
+    background-image: url('../src/abeille.png');
 }
 #chut4{
     left:440px;
+    background-image: url('../src/mechantDMarche2.png.png');
 }
 #chut5{
     left:1070px;
+    background-image: url('../src/ailNoScore.png');
 }
 #chut6{
     left:1168px;
+    background-image: url('../src/tomato.png.png');
 }
 #chut7{
     left:1283px;
+    background-image: url('../src/couteau.png.png');
 }
 #chut8{
     left:1398px;
+    background-image: url('../src/chorizoMonte1.png');
 }
 #chut9{
     left:1498px;
+    background-image: url('../src/flammeR.png.png');
 } */
 @keyframes moveRotate{
     0%
@@ -157,10 +171,10 @@
 #modalScore{
     width: 38%;
     min-height: 700px;
-    position: absolute;
+    position: relative;
     background-color: white;
     opacity: 0.8;
-    bottom: 54px;
+
 }
 #modalScore>div {
     display: flex;
