@@ -351,7 +351,7 @@ window.addEventListener('load', () => {
     collisionEchelle(){
       let grimpe = false
       echelles.forEach(echelle => {
-        if((this.posX >= echelle.x - 40  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
+        if((this.posX >= echelle.x - 24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
           grimpe = true;
         }
       });
@@ -395,9 +395,9 @@ window.addEventListener('load', () => {
 
   class Echelle {
     constructor (i, j) {
-      this.x = j * 32 +16
+      this.x = j * 32
       this.y = i * 32
-      ctx.drawImage(imageEchelleLvl1,this.x - 16,this.y);
+      ctx.drawImage(imageEchelleLvl1,this.x,this.y);
     }
   }
 
