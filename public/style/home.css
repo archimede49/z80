@@ -75,14 +75,43 @@
     color: white;
     box-shadow: inset -4px -4px 0px 0px #4AA52E;
 }
-#chut1{
+#chut0,#chut1, #chut2, #chut3, #chut4, #chut5, #chut6, #chut7, #chut8, #chut9{
     position: absolute;
+}
+    /* left:15px;
     width: 32px;
     height: 32px;
     background-color: red;
-    /* animation: moveLinearTopToBottom 14s linear infinite;
-    -webkit-animation: moveLinearTopToBottom 14s linear infinite; */
+    animation: moveLinearTopToBottom 14s linear infinite;
+    -webkit-animation: moveLinearTopToBottom 14s linear infinite;
 }
+#chut1{
+    left: 109px;
+}
+#chut2{
+    left: 213px;
+}
+#chut3{
+    left: 317px;
+}
+#chut4{
+    left:440px;
+}
+#chut5{
+    left:1070px;
+}
+#chut6{
+    left:1168px;
+}
+#chut7{
+    left:1283px;
+}
+#chut8{
+    left:1398px;
+}
+#chut9{
+    left:1498px;
+} */
 @keyframes moveRotate{
     0%
     {
