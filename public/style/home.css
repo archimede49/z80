@@ -10,8 +10,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    animation: moveScore 4s ease-out;
-    -webkit-animation: moveScore 4s ease-out;
+    animation: moveScore 10s ease-out;
+    -webkit-animation: moveScore 10s ease-out;
 }
 #tabScore table thead tr, #tabScore table tbody tr{
     display: flex;
@@ -34,23 +34,25 @@
 #element {
     width: 1280px;
     margin-top: 10px;
-    height: 25px;
-    border: 1px solid black;
+    height: 32px;
     position: relative;
     overflow: hidden;
 }
-#element div {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    background: linear-gradient(to left, black, red, black);
+#chori {
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/chorizo1erPas.png');
     position: absolute;
-    animation: moveRotate 4s linear infinite, moveLinearLeftToRight 14s linear infinite;
-    -webkit-animation: moveRotate 4s linear infinite, moveLinearLeftToRight 14s linear infinite;
+    /* animation: moveLinearLeftToRight 10s linear infinite;
+    -webkit-animation: moveLinearLeftToRight 10s linear infinite; */
+}
+#element #choriVert {
+    width: 32px;
+    height: 32px;
+    background-image: url('../src/mechantQuiMarche.png');
+    position: absolute;
+    /* animation: moveLinearLeftToRight 14s linear infinite;
+    -webkit-animation: moveLinearLeftToRight 14s linear infinite; */
 }
 @keyframes moveRotate{
     0%
@@ -88,8 +90,10 @@
 }
 #modalScore{
     width: 50%;
+    min-height: 700px;
     position: absolute;
-    top: 55px;
+    background-color: white;
+    opacity: 0.8;
 }
 #modalScore>div {
     display: flex;
@@ -117,6 +121,11 @@
     100%{
         width: 75%;
     }
+}
+#infoGame{
+    width: 315px;
+    height: 130px;
+    border: 1px solid black;
 }
 #box{
     display: flex;

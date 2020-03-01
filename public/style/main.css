@@ -1,4 +1,13 @@
+body{
+    font-family: 'Font Retro';
+    background-color: black;
+}
+
 #canvas {
     background-color: grey;
     background-image:url('../src/newFondCuisine.png');
+}
+@font-face {
+    font-family: "Font Retro";
+    src: url('../src/Retro Gaming.ttf')
 }

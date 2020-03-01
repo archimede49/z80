@@ -1,14 +1,17 @@
-
 window.addEventListener('DOMContentLoaded',event => {
+    modalScore();
+    animationLinear()
     event.preventDefault();
     console.log('dom complètement chargé')
     let fin = document.querySelector('#fin')
     let score = document.querySelector('#btnScore')
+    let start = document.querySelector('#start');
     // let scoreEnd = document.querySelector('#btnScore1')
     // let move = document.querySelector('#moveCanvas')
     console.log(fin);
     fin.onclick = gameOver;
     score.onclick = modalScore;
+    start.onclick = startGame;
     // scoreEnd.onclick = modalScore;
     // move.onclick = moveCanvas;
     
@@ -20,16 +23,11 @@ async function gameOver(){
     // let reponse = await rep.json();
     console.log(repSet);
 }
-//     if(repSet.ok){
-//         let repGet = await fetch('?controller=Home&action=display&fin=true', {method: 'GET'});
-//         console.log(repGet);
-//     }
-// }
 function modalScore(e){
     let element = document.querySelector('#modalScore');
     let imgLogo = document.querySelector('#logo img');
-    let button = e.target.className;
-    console.log(button)
+    let button='';
+
     element.style.display ="block";
     
     if(button == 'gameOverhard'){
@@ -103,4 +101,15 @@ function moveCanvas(){
     console.log(childBox);
     // console.log(newOrderChildBox);
     console.log(classFCB);
+}
+function startGame(){
+    let element = document.querySelector('#modalScore');
+    element.style.display ="none";
+}
+function animationLinear(){
+    let random = Math.random()*5;
+    let chori = document.querySelector('#chori');
+    let choriVert = document.querySelector('#choriVert');
+    chori.style.animation = `moveLinearLeftToRight ${random*2}s linear infinite`;
+    choriVert.style.animation = `moveLinearLeftToRight ${random*1.5}s linear infinite`;
 }
