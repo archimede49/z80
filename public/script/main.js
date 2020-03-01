@@ -18,12 +18,18 @@ window.addEventListener('load', () => {
   let joueur;
   let mechants = [];
   let mechantsVolants = [];
+  let casesFin = [];
   let plateFormes;
   let echelles;
   let obstacles;
   let itemsBonus = [];
   let pause = false;
   let interval;
+
+  //suivi joueur
+  let score = 0;
+  let vie = 3;
+
   //déclarations images
   var imageCoeur = new Image();
   imageCoeur.src = 'public/src/coeur.png';
@@ -33,7 +39,18 @@ window.addEventListener('load', () => {
   var imageAil = new Image();
   imageAil.src = 'public/src/ailNoScore.png';
   var imageAilTouche = new Image();
-  imageAilTouche.src = 'public/src/ail.png'; 
+  imageAilTouche.src = 'public/src/ail.png';
+
+  var imagePiment = new Image();
+  imagePiment.src = 'public/src/piment.png';
+  var imagePimentTouche = new Image();
+  imagePimentTouche.src = 'public/src/newPiment.png';
+
+  var imageTomate = new Image();
+  imageTomate.src = 'public/src/tomato.png';
+  var imageTomateTouche = new Image();
+  imageTomateTouche.src = 'public/src/newTomato.png';
+
 
   //image feu
   var imageFeu = new Image();
@@ -177,18 +194,18 @@ window.addEventListener('load', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
     [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
@@ -233,8 +250,18 @@ window.addEventListener('load', () => {
     11 : {
       img : imageAil,
       imgTouche : imageAilTouche,
-      score : 50
-    }, 
+      score : 15
+    },
+    12 : {
+      img : imagePiment,
+      imgTouche : imagePimentTouche,
+      score : 15
+    },
+    13 : {
+      img : imageTomate,
+      imgTouche : imageTomateTouche,
+      score : 15
+    },
     20 : {
       img : imageFeu,
       score : -15
@@ -263,6 +290,7 @@ window.addEventListener('load', () => {
     let e = 0;
     let cptItem = 0;
     let cptMechant = 0;
+    let cptFin = 0;
     let cptMechantVolant = 0;
     for (let i = 0; i < 22; i++) {
       const ligne = terrain[i]
@@ -275,7 +303,10 @@ window.addEventListener('load', () => {
         else if(ligne[j] === 2){
           echelles[e] = new Echelle(i,j);
           e++;
-        }else if(ligne[j] === 10 || ligne[j] === 11 || ligne[j] === 20){
+        }else if(ligne[j] === 9){
+          casesFin[cptFin] = new CaseFin(i,j);
+          cptFin++;
+        }else if(ligne[j] === 10 || ligne[j] === 11 || ligne[j] === 12 || ligne[j] === 13 || ligne[j] === 20){
           if(cpt === 0){
             itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
             cptItem++; 
@@ -315,7 +346,11 @@ window.addEventListener('load', () => {
       ennemiVolant.draw();
       ennemiVolant.setPosition();
     }
-    //console.log(itemsBonus);
+    if(score < 0){
+      score = 0;
+    }
+    ctx.font = "20px Font Retro";
+    ctx.fillText(score,5,20);
   }
   class Joueur {
     constructor (i, j) {
@@ -367,6 +402,7 @@ window.addEventListener('load', () => {
 
 
     setPosition () {
+      this.collisionFin();
       if (!this.collisionCanva()) {
         if (rightPressed) {
           this.posX += dx
@@ -410,10 +446,11 @@ window.addEventListener('load', () => {
       //console.log(itemsBonus);
       
       itemsBonus.forEach(item => {
-        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y && this.posY <= item.y + 8)){
+        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y && this.posY <= item.y + 8) && item.actif){
           // touche = true;
           // console.log("touché");
           if(item.score >= 0){
+            score = score + item.score;
             touche = true;
             item.desactiver();
           }
@@ -421,13 +458,14 @@ window.addEventListener('load', () => {
             const date = new Date();
             //console.log(date - item.dateTouche);
             if(date - item.dateTouche > 1000){
+              score = score + item.score;
               touche = true;
               item.setNewDate();
               item.desactiver();
             }
             //item.dateTouche
           }
-          console.log(touche);
+          //console.log(touche);
         }
       });
     }
@@ -467,6 +505,7 @@ window.addEventListener('load', () => {
         if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 24) && (this.posY >= mechant.posY && this.posY <= mechant.posY + 8)) {
           const date = new Date()
           if (date - mechant.dateTouche > 1000) {
+            score -= 15;
             mechant.setNewDate()
           }
         }
@@ -477,6 +516,7 @@ window.addEventListener('load', () => {
         if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 24) && (this.posY >= mechant.posY - 8 && this.posY <= mechant.posY + 8)) {
           const date = new Date()
           if (date - mechant.dateTouche > 1000) {
+            score -= 15;
             mechant.setNewDate()
           }
         }
@@ -501,7 +541,18 @@ window.addEventListener('load', () => {
       }
       return collision;
     }
+
+    collisionFin(){
+      casesFin.forEach(caseFin => {
+        if((this.posX >= caseFin.x - 32 && this.posX <= caseFin.x) && (this.posY >= caseFin.y && this.posY <= caseFin.y + 8)){
+          alert('Fin du niveau !!!')
+        }
+      })
+    }
+
   }
+
+  
   class PlateForme {
     constructor (i, j) {
       this.x = j * 32 
@@ -636,6 +687,12 @@ window.addEventListener('load', () => {
     }
     setNewDate () {
       this.dateTouche = new Date()
+    }
+  }
+  class CaseFin{
+    constructor(i,j){
+      this.x = j*32;
+      this.y = i*32;
     }
   }
 
