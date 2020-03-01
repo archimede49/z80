@@ -19,13 +19,14 @@ window.addEventListener('load', () => {
   let mechants = [];
   let mechantsVolants = [];
   let casesFin = [];
+  let terrain = [];
   let plateFormes;
   let echelles;
   let obstacles;
   let itemsBonus = [];
   let pause = false;
   let interval;
-
+  let niveau = 1;
   //suivi joueur
   let score = 0;
   let vie = 3;
@@ -142,14 +143,21 @@ window.addEventListener('load', () => {
       }
       // Gestion de la suppression
     } else if (e.keyCode === 46) {
-      joueur = undefined
+      restart();
+    }
+  }
+function restart(){
+  joueur = undefined
       // force une nouvelle déclaration du joueur
       cpt = 0
       plateFormes = undefined
-      itemsBonus = undefined
+      itemsBonus = []
+      niveau =1
       echelles = undefined
-    }
-  }
+      score = 0
+      vie = 3
+}
+
   function keyUpHandler (e) {
     if (e.keyCode == 39) {
       rightPressed = false
@@ -189,7 +197,7 @@ window.addEventListener('load', () => {
   // ]
 
   //Niveau 1
-  const terrain = [
+  terrain[1] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -215,7 +223,7 @@ window.addEventListener('load', () => {
   ]
 
   //Niveau 2
-  const terrain2 = [
+  terrain[2] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -293,7 +301,8 @@ window.addEventListener('load', () => {
     let cptFin = 0;
     let cptMechantVolant = 0;
     for (let i = 0; i < 22; i++) {
-      const ligne = terrain[i]
+     
+      const ligne = terrain[niveau][i]
       
       for (let j = 0; j < 15; j++) {
         if (ligne[j] === 1) {
@@ -351,6 +360,17 @@ window.addEventListener('load', () => {
     }
     ctx.font = "20px Font Retro";
     ctx.fillText(score,5,20);
+    ctx.fillText("Santé : "+vie,360,20);
+
+    isGameOver();
+  }
+
+  function isGameOver(){
+    if(vie === 0 || joueur.posY > 700){
+      //appel modal
+      //clearInterval
+      //restart
+    }
   }
   class Joueur {
     constructor (i, j) {
@@ -459,6 +479,7 @@ window.addEventListener('load', () => {
             //console.log(date - item.dateTouche);
             if(date - item.dateTouche > 1000){
               score = score + item.score;
+              vie --;
               touche = true;
               item.setNewDate();
               item.desactiver();
@@ -506,6 +527,7 @@ window.addEventListener('load', () => {
           const date = new Date()
           if (date - mechant.dateTouche > 1000) {
             score -= 15;
+            vie--;
             mechant.setNewDate()
           }
         }
@@ -517,6 +539,7 @@ window.addEventListener('load', () => {
           const date = new Date()
           if (date - mechant.dateTouche > 1000) {
             score -= 15;
+            vie--;
             mechant.setNewDate()
           }
         }
@@ -586,8 +609,8 @@ window.addEventListener('load', () => {
       }
     }
     desactiver(){
-      ctx.drawImage(this.item.imgTouche,this.x,this.y);
       if(this.score > 0){
+        ctx.drawImage(this.item.imgTouche,this.x,this.y);
         this.actif = false;
 
       }
