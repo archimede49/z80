@@ -5,7 +5,7 @@ abstract class BaseModel {
 
 	const SERVER   = "localhost";
 	const USER     = "root";
-	const PASSWORD = "";
+	const PASSWORD = "root";
 	const BASE     = "z80";
 
 	public function __construct() {

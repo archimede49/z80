@@ -37,8 +37,8 @@ window.addEventListener('load', () => {
 /*-----------------------------*/
 
 
-  const canvas = document.getElementById('canvas')
-  const ctx = canvas.getContext('2d')
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
   
   // var position personnage
   var posX = 50
@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
   let niveau = 1;
   //suivi joueur
   let score = 0;
-  let vie = 3;
+  let vie = 9;
 
   //déclarations images
   var imageCoeur = new Image();
@@ -164,35 +164,70 @@ window.addEventListener('load', () => {
     } else if (e.keyCode == 40) {
       downPressed = true
     }else if (e.keyCode === 32) {
-      if (!pause) {
-        clearInterval(interval)
-        homeJs.modalScore('pause');
-        ctx.beginPath()
-        ctx.rect(0, 0, canvas.width, canvas.height)
-        ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
-        ctx.fill()
-        ctx.closePath()
-        pause = true
-      } else {
-        homeJs.modalScore('finPause');
-        interval = setInterval(draw, 50)
-        pause = false
-      }
+      arret();
       // Gestion de la suppression
     } else if (e.keyCode === 46) {
-      restart();
+      restart(1);
     }
   }
-function restart(){
-  joueur = undefined
+
+  function interNiveau(){
+    
+      clearInterval(interval)
+      
+      ctx.beginPath()
+      ctx.rect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
+      ctx.fill()
+      ctx.closePath()
+      pause = true
+      let interText = document.querySelector('#interNiveau')
+      setTimeout(()=>{
+        
+      interText.style.backgroundImage = `url('public/src/Visuel${niveau}.png')`;
+      interText.style.zIndex = "3";
+      }, 3000);
+      setTimeout(()=>{
+        interText.style.zIndex = "-1";
+        interval = setInterval(draw, 50)
+      }, 8000);
+    
+  }
+
+  function arret(){
+    if (!pause) {
+      clearInterval(interval)
+      modalScore('pause');
+      ctx.beginPath()
+      ctx.rect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
+      ctx.fill()
+      ctx.closePath()
+      pause = true
+    } else {
+      modalScore('finPause');
+      interval = setInterval(draw, 50)
+      pause = false
+    }
+  }
+function restart(niveau){
+      clearInterval(interval);
+      canvas = document.getElementById('canvas');
+      ctx = canvas.getContext('2d');
+      joueur = undefined
       // force une nouvelle déclaration du joueur
       cpt = 0
-      plateFormes = undefined
+      plateFormes = []
       itemsBonus = []
-      niveau =1
-      echelles = undefined
-      score = 0
-      vie = 3
+      echelles = []
+      if(niveau ==1){
+        score = 0
+        vie = 3
+      }
+      
+      dessinerTerrain();
+      interval = setInterval(draw,50);
+
 }
 
   function keyUpHandler (e) {
@@ -286,6 +321,57 @@ function restart(){
   ]
 
   //Niveau 3
+  terrain[3] = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 10, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+
+  //Niveau 3
+  terrain[4] = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 13, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 12, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 10, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+
   const tabItems ={
     10 : {
       img : imageCoeur,
@@ -606,7 +692,8 @@ function restart(){
     collisionFin(){
       casesFin.forEach(caseFin => {
         if((this.posX >= caseFin.x - 32 && this.posX <= caseFin.x) && (this.posY >= caseFin.y && this.posY <= caseFin.y + 8)){
-          alert('Fin du niveau !!!')
+          clearInterval(interval);
+          moveCanvas(niveau);
         }
       })
     }
@@ -790,7 +877,14 @@ function modalScore(e){
   }else if (button == 'pause'){
       audioG.pause();
       sonIntro.play();
-  }else{
+  }
+  else if( button == "win"){
+    document.querySelector('#endGame').style.display="block";
+    document.querySelector('#start').style.display="none";
+    infoGame.style.backgroundImage = "url('public/src/FondVouluFinal.png')";
+    document.querySelector('#sonFinGame').play();
+  }
+  else{
       imgLogo.style.animation = 'dezoom 5s linear';
   }
 }
@@ -801,6 +895,7 @@ function moveCanvas(){
   console.log(childBox);
   let firstChildBox = testBox.firstElementChild;// penser a vider le canvas 
   let classFCB = firstChildBox.className;
+  
   if(classFCB == 'front'){
       box.style.transform = 'translateZ(-100px) rotateY(-90deg) translateZ(-225px) translateX(-490px)';
       childBox[0].removeAttribute('id');
@@ -811,22 +906,36 @@ function moveCanvas(){
       }
   }else if(classFCB == 'right'){
       box.style.transform = 'translateZ(-100px) rotateY(-180deg) translateZ(237px) translateX(-478px)';
-      childBox[0].removeAttribute('id');
-      childBox[1].setAttribute('id','canvas');
+      childBox[1].removeAttribute('id');
+      childBox[2].setAttribute('id','canvas');
       var newOrder = new Array(childBox[2],childBox[3],childBox[0],childBox[1]);
       for (let index = 0; index < 4; index++) {
           box.appendChild(newOrder[index]);
       }
   }else if(classFCB == 'left'){
       box.style.transform = 'translateZ(-100px) rotateY(-270deg) translateZ(223px)';
-      childBox[0].removeAttribute('id');
-      childBox[1].setAttribute('id','canvas');
+      childBox[2].removeAttribute('id');
+      childBox[3].setAttribute('id','canvas');
       var newOrder = new Array(childBox[3],childBox[0],childBox[1],childBox[2]);
       for (let index = 0; index < 4; index++) {
           box.appendChild(newOrder[index]);
       }
   }else if(classFCB == 'back'){
-      gameOver;
+      //gameOver;
+      // if(niveau === 4){
+      //   modalScore("win");
+      // }
+      // childBox[0].removeAttribute('id');
+      // childBox[1].setAttribute('id','canvas');
+      // var newOrder = new Array(childBox[0],childBox[1],childBox[2],childBox[3]);
+      // for (let index = 0; index < 4; index++) {
+      //     box.appendChild(newOrder[index]);
+      // }
+  }
+  if(niveau <= 4){
+  niveau++;
+  restart(niveau);
+  interNiveau();
   }
 }
 function startGame(){
