@@ -54,6 +54,14 @@
     /* animation: moveLinearLeftToRight 14s linear infinite;
     -webkit-animation: moveLinearLeftToRight 14s linear infinite; */
 }
+#chut1{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    /* animation: moveLinearTopToBottom 14s linear infinite;
+    -webkit-animation: moveLinearTopToBottom 14s linear infinite; */
+}
 @keyframes moveRotate{
     0%
     {
@@ -80,6 +88,14 @@
     100%
     {
         left: 110%;
+    }
+}
+@keyframes moveLinearTopToBottom{
+    0%{
+        top: -35px
+    }
+    100%{
+        top: 755px;
     }
 }
 #endGame, #tabScore{

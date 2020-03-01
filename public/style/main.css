@@ -1,6 +1,7 @@
 body{
     font-family: 'Font Retro';
     background-color: black;
+    overflow: hidden;
 }
 
 #canvas {

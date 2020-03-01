@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded',event => {
     modalScore();
     animationLinear()
+    chuteAlea();
     event.preventDefault();
     console.log('dom complètement chargé')
     let fin = document.querySelector('#fin')
@@ -107,9 +108,20 @@ function startGame(){
     element.style.display ="none";
 }
 function animationLinear(){
-    let random = Math.random()*5;
+    let random = Math.random()*20;
+    console.log(random);
     let chori = document.querySelector('#chori');
     let choriVert = document.querySelector('#choriVert');
-    chori.style.animation = `moveLinearLeftToRight ${random*2}s linear infinite`;
-    choriVert.style.animation = `moveLinearLeftToRight ${random*1.5}s linear infinite`;
+    chori.style.animation = `moveLinearLeftToRight ${random*5}s linear infinite`;
+    choriVert.style.animation = `moveLinearLeftToRight ${random*6}s linear infinite`;
+}
+function getRandomArbitrary() {
+    var random = Math.random() * (1400 - 0) + 0;
+    console.log(random);
+     return random;
+}
+function chuteAlea(){
+    let chut1 = document.querySelector('#chut1');
+    chut1.style.top = '780px';
+    chut1.style.transition = '4ms';
 }
