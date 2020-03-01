@@ -27,6 +27,8 @@ window.addEventListener('load', () => {
   //déclarations images
   var imageCoeur = new Image();
   imageCoeur.src = 'public/src/coeur.png';
+  var imageCoeurTouche = new Image();
+  imageCoeurTouche.src = 'public/src/newCoeur.png';
 
   //image feu
   var imageFeu = new Image();
@@ -220,6 +222,7 @@ window.addEventListener('load', () => {
   const tabItems ={
     10 : {
       img : imageCoeur,
+      imgTouche : imageCoeurTouche,
       score : 50
     }, 
     20 : {
@@ -371,6 +374,7 @@ window.addEventListener('load', () => {
       }
       this.collisionItem();
       this.collisionMechant();
+      this.collisionMechantVolant();
       if(this.collisionEchelle()){
         if(upPressed){
           this.posY -= dy;
@@ -450,10 +454,19 @@ window.addEventListener('load', () => {
 
     collisionMechant () {
       mechants.forEach(mechant => {
-        if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 40) && (this.posY >= mechant.posY && this.posY <= mechant.posY + 8)) {
+        if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 24) && (this.posY >= mechant.posY && this.posY <= mechant.posY + 8)) {
           const date = new Date()
           if (date - mechant.dateTouche > 1000) {
-            console.log('collision')
+            mechant.setNewDate()
+          }
+        }
+      })
+    }
+    collisionMechantVolant () {
+      mechantsVolants.forEach(mechant => {
+        if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 24) && (this.posY >= mechant.posY - 8 && this.posY <= mechant.posY + 8)) {
+          const date = new Date()
+          if (date - mechant.dateTouche > 1000) {
             mechant.setNewDate()
           }
         }
@@ -512,6 +525,7 @@ window.addEventListener('load', () => {
       }
     }
     desactiver(){
+      ctx.drawImage(this.item.imgTouche,this.x,this.y);
       if(this.score > 0){
         this.actif = false;
 
