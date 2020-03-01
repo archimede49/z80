@@ -30,6 +30,11 @@ window.addEventListener('load', () => {
   var imageCoeurTouche = new Image();
   imageCoeurTouche.src = 'public/src/newCoeur.png';
 
+  var imageAil = new Image();
+  imageAil.src = 'public/src/ailNoScore.png';
+  var imageAilTouche = new Image();
+  imageAilTouche.src = 'public/src/ail.png'; 
+
   //image feu
   var imageFeu = new Image();
   imageFeu.src = 'public/src/flammeR.png';
@@ -183,7 +188,7 @@ window.addEventListener('load', () => {
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
+    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
@@ -209,7 +214,7 @@ window.addEventListener('load', () => {
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
+    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
@@ -223,6 +228,11 @@ window.addEventListener('load', () => {
     10 : {
       img : imageCoeur,
       imgTouche : imageCoeurTouche,
+      score : 50
+    },
+    11 : {
+      img : imageAil,
+      imgTouche : imageAilTouche,
       score : 50
     }, 
     20 : {
@@ -265,7 +275,7 @@ window.addEventListener('load', () => {
         else if(ligne[j] === 2){
           echelles[e] = new Echelle(i,j);
           e++;
-        }else if(ligne[j] === 10 || ligne[j] === 20){
+        }else if(ligne[j] === 10 || ligne[j] === 11 || ligne[j] === 20){
           if(cpt === 0){
             itemsBonus[cptItem] = new ItemsBonus(i,j,ligne[j]);
             cptItem++; 
