@@ -1,9 +1,10 @@
 #tabScore{
-    height: 95px;
+    height: 113px;
     border: 1px solid black;
     position: relative;
     overflow: hidden;
-    margin: 10px 0 15px 0
+    margin: 10px 0 15px 0;
+    background-color: black;
 }
 #tabScore table{
     width: 315px;
@@ -19,6 +20,12 @@
 #tabScore table thead tr th, #tabScore table tbody td {
     width: 33%;
     text-align: center;
+}
+#tabScore table thead tr{
+    padding: 3px 0;
+}
+#tabScore table tbody tr{
+    padding: 1px 0;
 }
 @keyframes moveScore{
     0% {

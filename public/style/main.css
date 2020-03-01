@@ -3,7 +3,15 @@ body{
     background-color: black;
     overflow: hidden;
 }
-
+.trio{
+    color: red;
+}
+.gold{
+    color: goldenrod;
+}
+.teal{
+    color: teal;
+}
 #canvas {
     background-color: grey;
     background-image:url('../src/newFondCuisine.png');

@@ -1,3 +1,4 @@
+import * as homeJs from './home.js';
 window.addEventListener('load', () => {
   const canvas = document.getElementById('canvas')
   const ctx = canvas.getContext('2d')
@@ -74,6 +75,7 @@ window.addEventListener('load', () => {
     }else if (e.keyCode === 32) {
       if (!pause) {
         clearInterval(interval)
+        homeJs.modalScore();
         ctx.beginPath()
         ctx.rect(0, 0, canvas.width, canvas.height)
         ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
@@ -81,6 +83,7 @@ window.addEventListener('load', () => {
         ctx.closePath()
         pause = true
       } else {
+        homeJs.modalScore('finPause');
         interval = setInterval(draw, 20)
         pause = false
       }
