@@ -14,7 +14,7 @@ body{
 }
 #canvas {
     background-color: grey;
-    background-image:url('../src/newFondCuisine.png');
+    background-image:url('../src/fondCuisineMarron.png');
 }
 @font-face {
     font-family: "Font Retro";

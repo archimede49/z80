@@ -39,6 +39,10 @@ window.addEventListener('load', () => {
   var imageEchelleLvl2 = new Image();
   imageEchelleLvl2.src = 'public/src/echelle2emeNiveau.png';
 
+  //image sol
+  var imageSol = new Image();
+  imageSol.src = 'public/src/sol1.png';
+
   //image chorizo
   var imageChorizo = new Image();
   imageChorizo.src = 'public/src/chorizoArret.png';
@@ -296,7 +300,7 @@ window.addEventListener('load', () => {
 
     for(const ennemiVolant of mechantsVolants){
       ennemiVolant.draw();
-      //ennemiVolant.setPosition();
+      ennemiVolant.setPosition();
     }
     //console.log(itemsBonus);
   }
@@ -433,7 +437,7 @@ window.addEventListener('load', () => {
     collisionEchelle(){
       let grimpe = false
       echelles.forEach(echelle => {
-        if((this.posX >= echelle.x - 24  && this.posX <= echelle.x +40)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
+        if((this.posX >= echelle.x - 24  && this.posX <= echelle.x +24)  && (this.posY >= echelle.y - 31 && this.posY <= echelle.y + 24) ){
           grimpe = true;
         }
       });
@@ -477,19 +481,15 @@ window.addEventListener('load', () => {
   }
   class PlateForme {
     constructor (i, j) {
-      this.x = j * 32 + 16
+      this.x = j * 32 
       this.y = i * 32
-      ctx.beginPath()
-      ctx.rect(j * 32, i * 32, 32, 32)
-      ctx.fillStyle = '#FF0000'
-      ctx.fill()
-      ctx.closePath()
+      ctx.drawImage(imageSol,this.x,this.y);
     }
   }
 
   class Echelle {
     constructor (i, j) {
-      this.x = j * 32
+      this.x = j * 32 
       this.y = i * 32
       ctx.drawImage(imageEchelleLvl1,this.x,this.y);
     }
@@ -581,7 +581,7 @@ window.addEventListener('load', () => {
 
   class MechantVolant {
     constructor (i, j, indiceMechant) {
-      this.dx = 3 // vitesse du méchant pas gentil
+      this.dy = 7 // vitesse du méchant pas gentil
       this.sensHaut = true
       this.posX = j * 32
       this.posY = i * 32
@@ -591,23 +591,22 @@ window.addEventListener('load', () => {
       this.draw()
     }
     draw () {
-      console.log("abeille")
       ctx.drawImage(this.mechantVolant.img, this.posX, this.posY)
     }
     setPosition () {
-      if (this.sensDroit) {
-        if (this.posX <= this.initX + 32) {
-          this.posX += this.dx
+      if (this.sensHaut) {
+        if (this.posY <= this.initY + 64) {
+          this.posY += this.dy
         } else {
-          this.posX -= this.dx
-          this.sensDroit = false
+          this.posY -= this.dy
+          this.sensHaut = false
         }
       } else {
-        if (this.posX >= this.initX - 32) {
-          this.posX -= this.dx
+        if (this.posY >= this.initY - 64) {
+          this.posY -= this.dy
         } else {
-          this.posX += dx
-          this.sensDroit = true
+          this.posY += dy
+          this.sensHaut = true
         }
       }
     }
