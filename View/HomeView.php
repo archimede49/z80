@@ -11,9 +11,9 @@ class HomeView extends BaseView
         $i = 1;
         foreach ($liste as $unitScore){
             if ($i < 4) {
-                $score .= "<tr class='trio'><td>".$i++."</td><td>".$unitScore[0]."</td><td>".$unitScore[1]."</td></tr>";
+                $score .= "<tr class='trio'><td>".$i++."</td><td>".$unitScore[1]."</td><td>".$unitScore[0]."</td></tr>";
             }else{
-                $score .= "<tr class='gold'><td>".$i++."</td><td>".$unitScore[0]."</td><td>".$unitScore[1]."</td></tr>";
+                $score .= "<tr class='gold'><td>".$i++."</td><td>".$unitScore[1]."</td><td>".$unitScore[0]."</td></tr>";
             }
         }
         $this->pageHTML .=file_get_contents( "public/html/home.html");
