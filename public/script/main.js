@@ -48,6 +48,15 @@ window.addEventListener('load', () => {
   var imageChorizoMarche2 = new Image();
   imageChorizoMarche2.src = 'public/src/chorizo2emePas.png';
 
+  var imageChorizoMarcheG = new Image();
+  imageChorizoMarcheG.src = 'public/src/choriGmarche1.png';
+
+  var imageChorizoMarcheG1 = new Image();
+  imageChorizoMarcheG1.src = 'public/src/choriGmarche2.png';
+
+  var imageChorizoArretG = new Image();
+  imageChorizoArretG.src = 'public/src/choriGneutre.png';
+
   var imageChorizoMonte1 = new Image();
   imageChorizoMonte1.src = 'public/src/chorizoMonte1.png';
 
@@ -55,7 +64,19 @@ window.addEventListener('load', () => {
   imageChorizoMonte2.src = 'public/src/chorizoMonte2.png'; 
 
   var imageMechant = new Image();
-  imageMechant.src = 'public/src/mechantQuiMarche.png'
+  imageMechant.src = 'public/src/mechantQuiMarche.png';
+
+  var imageMechantMarcheD1 = new Image();
+  imageMechantMarcheD1.src = 'public/src/mechantDmarche1.png';
+
+  var imageMechantMarcheD2 = new Image();
+  imageMechantMarcheD2.src = 'public/src/mechantDmarche2.png';
+
+  var imageMechantMarcheG1 = new Image();
+  imageMechantMarcheG1.src = 'public/src/mechantGmarche1.png';
+
+  var imageMechantMarcheG2 = new Image();
+  imageMechantMarcheG2.src = 'public/src/mechantGmarche2.png';
 
   //background
   var imageLvl1 = new Image();
@@ -135,6 +156,7 @@ window.addEventListener('load', () => {
   //   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   // ]
 
+  //Niveau 1
   const terrain = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -159,6 +181,34 @@ window.addEventListener('load', () => {
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
+
+  //Niveau 2
+  const terrain2 = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
+    [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 10, 2, 0, 30, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 3, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+
+  //Niveau 3
   const tabItems ={
     10 : {
       img : imageCoeur,
@@ -225,6 +275,7 @@ window.addEventListener('load', () => {
     }
     for(const ennemi of mechants){
       ennemi.draw();
+      ennemi.setPosition();
     }
     //console.log(itemsBonus);
   }
@@ -261,13 +312,19 @@ window.addEventListener('load', () => {
           }
         }
         else if(leftPressed){
-          ctx.drawImage(imageChorizoMarche, this.posX, this.posY);
+          if(this.marche == 0){
+            ctx.drawImage(imageChorizoMarcheG, this.posX, this.posY);
+            this.marche =1;
+          }else if (this.marche == 1){
+            ctx.drawImage(imageChorizoMarcheG1, this.posX, this.posY);
+            this.marche = 0;
+          }
         }
         
         else{
         ctx.drawImage(imageChorizo, this.posX, this.posY);
       }
-      
+    
     }
 
 
@@ -288,6 +345,7 @@ window.addEventListener('load', () => {
         }
       }
       this.collisionItem();
+      this.collisionMechant();
       if(this.collisionEchelle()){
         if(upPressed){
           this.posY -= dy;
@@ -313,7 +371,7 @@ window.addEventListener('load', () => {
       //console.log(itemsBonus);
       
       itemsBonus.forEach(item => {
-        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y -32 && this.posY <= item.y + 32)){
+        if((this.posX >= item.x -24 && this.posX <= item.x +24) && (this.posY >= item.y && this.posY <= item.y + 8)){
           // touche = true;
           // console.log("touché");
           if(item.score >= 0){
@@ -363,6 +421,18 @@ window.addEventListener('load', () => {
       }
       this.monte = grimpe;
       return grimpe;
+    }
+
+    collisionMechant () {
+      mechants.forEach(mechant => {
+        if ((this.posX >= mechant.posX - 24 && this.posX <= mechant.posX + 40) && (this.posY >= mechant.posY && this.posY <= mechant.posY + 8)) {
+          const date = new Date()
+          if (date - mechant.dateTouche > 1000) {
+            console.log('collision')
+            mechant.setNewDate()
+          }
+        }
+      })
     }
 
     collisionPlateForme () {
@@ -433,15 +503,58 @@ window.addEventListener('load', () => {
   }
 
   class Mechant {
-    constructor (i,j,indiceMechant){
-      this.posX = j * 32;
-      this.posY = i * 32;
-      this.mechant = tabEnnemis[indiceMechant];
-      console.log(this.mechant);
-      this.draw();
+    constructor (i, j, indiceMechant) {
+      this.dx = 3 // vitesse du méchant pas gentil
+      this.sensDroit = true
+      this.posX = j * 32
+      this.posY = i * 32
+      this.initX = this.posX
+      this.marche = 0;
+      this.dateTouche = new Date();
+      this.mechant = tabEnnemis[indiceMechant]
+      console.log(this.mechant)
+      this.draw()
     }
-    draw(){
-      ctx.drawImage(imageMechant,this.posX,this.posY);
+    draw () {
+      //ctx.drawImage(imageMechant, this.posX, this.posY);
+      if(this.sensDroit){
+        if(this.marche == 0){
+          this.marche = 1;
+          ctx.drawImage(imageMechantMarcheD1,this.posX,this.posY);
+        }else if (this.marche == 1){
+          this.marche = 0;
+          ctx.drawImage(imageMechantMarcheD2,this.posX,this.posY);
+        }
+      }else{
+        if(this.marche == 0){
+          this.marche = 1;
+          ctx.drawImage(imageMechantMarcheG1,this.posX,this.posY);
+        }else if (this.marche == 1){
+          this.marche = 0;
+          ctx.drawImage(imageMechantMarcheG2,this.posX,this.posY);
+        }
+      }
+    }
+    setPosition () {
+      if (this.sensDroit) {
+        if (this.posX <= this.initX + 32) {          
+          this.posX += this.dx
+        } else {
+          this.posX -= this.dx
+          this.sensDroit = false
+        }
+      } else {
+        if (this.posX >= this.initX - 32) { 
+          this.posX -= this.dx
+        } else {
+          this.posX += dx
+          this.sensDroit = true
+        }
+      }
+    }
+
+    setNewDate(){
+      this.dateTouche = new Date();
     }
   }
   dessinerTerrain()
