@@ -17,12 +17,13 @@ window.addEventListener('load', () => {
   var downPressed = false // 40
   let joueur;
   let mechants = [];
+  let mechantsVolants = [];
   let plateFormes;
   let echelles;
   let obstacles;
   let itemsBonus = [];
   let pause = false;
-  
+  let interval;
   //déclarations images
   var imageCoeur = new Image();
   imageCoeur.src = 'public/src/coeur.png';
@@ -78,6 +79,9 @@ window.addEventListener('load', () => {
   var imageMechantMarcheG2 = new Image();
   imageMechantMarcheG2.src = 'public/src/mechantGmarche2.png';
 
+  var imageMechantVolant = new Image();
+  imageMechantVolant.src = 'public/src/abeille.png'; 
+
   //background
   var imageLvl1 = new Image();
   imageLvl1.src = 'public/src/newFondCuisine.png';
@@ -105,7 +109,7 @@ window.addEventListener('load', () => {
         pause = true
       } else {
         homeJs.modalScore('finPause');
-        interval = setInterval(draw, 20)
+        interval = setInterval(draw, 50)
         pause = false
       }
       // Gestion de la suppression
@@ -167,7 +171,7 @@ window.addEventListener('load', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
     [0, 10, 0, 0, 0, 0, 0, 0, 20, 0, 2, 0, 0, 0, 0],
     [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -226,6 +230,12 @@ window.addEventListener('load', () => {
     }
   }
 
+  const tabEnnemisVolants = {
+    40: {
+      img: imageMechantVolant
+    }
+  }
+
   var cpt = 0
   function dessinerTerrain () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -236,6 +246,7 @@ window.addEventListener('load', () => {
     let e = 0;
     let cptItem = 0;
     let cptMechant = 0;
+    let cptMechantVolant = 0;
     for (let i = 0; i < 22; i++) {
       const ligne = terrain[i]
       
@@ -257,6 +268,11 @@ window.addEventListener('load', () => {
             mechants[cptMechant] = new Mechant(i,j,ligne[j]);
             cptMechant++;
           }
+        }else if (ligne[j] === 40) {
+          if (cpt === 0) {
+            mechantsVolants[cptMechantVolant] = new MechantVolant(i, j, ligne[j])
+            cptMechantVolant++
+          }
         }else if (ligne[j] === 3) {
           if (cpt === 0) {
             joueur = new Joueur(i, j)
@@ -276,6 +292,11 @@ window.addEventListener('load', () => {
     for(const ennemi of mechants){
       ennemi.draw();
       ennemi.setPosition();
+    }
+
+    for(const ennemiVolant of mechantsVolants){
+      ennemiVolant.draw();
+      //ennemiVolant.setPosition();
     }
     //console.log(itemsBonus);
   }
@@ -557,6 +578,44 @@ window.addEventListener('load', () => {
       this.dateTouche = new Date();
     }
   }
+
+  class MechantVolant {
+    constructor (i, j, indiceMechant) {
+      this.dx = 3 // vitesse du méchant pas gentil
+      this.sensHaut = true
+      this.posX = j * 32
+      this.posY = i * 32
+      this.initY = this.posY
+      this.dateTouche = new Date()
+      this.mechantVolant = tabEnnemisVolants[indiceMechant]
+      this.draw()
+    }
+    draw () {
+      console.log("abeille")
+      ctx.drawImage(this.mechantVolant.img, this.posX, this.posY)
+    }
+    setPosition () {
+      if (this.sensDroit) {
+        if (this.posX <= this.initX + 32) {
+          this.posX += this.dx
+        } else {
+          this.posX -= this.dx
+          this.sensDroit = false
+        }
+      } else {
+        if (this.posX >= this.initX - 32) {
+          this.posX -= this.dx
+        } else {
+          this.posX += dx
+          this.sensDroit = true
+        }
+      }
+    }
+    setNewDate () {
+      this.dateTouche = new Date()
+    }
+  }
+
   dessinerTerrain()
-  let interval = setInterval(draw, 50)
+  interval = setInterval(draw, 50)
 })
